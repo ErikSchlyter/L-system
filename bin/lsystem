@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'LSystem'
+
+if ARGV.size >= 3 then
+  axiom = ARGV[0]
+  rules = {}
+  ARGV[1..-2].each { |arg| rules[arg[0]] = arg[2..-1]}
+  iterations = ARGV[-1].to_i
+  puts LSystem.new(axiom, rules, iterations)
+else
+  warn "Usage: lsystem AXIOM [RULE]... ITERATIONS"
+  warn "Example generating turtle graphics (angle=60) for the Sierpinski triangle:"
+  warn "    lsystem A A=B-A-B B=A+B+A 8"
+end
+
+
